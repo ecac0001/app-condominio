@@ -1,0 +1,19 @@
+{% extends "base.html" %} 
+{% block title %}Painel administrativo{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <h1 class="mb-4">Postar Mensagem para Todos os Usuários</h1>
+    <form method="POST">
+        <div class="form-group">
+            <label for="info_message">Mensagem:</label>
+            <textarea class="form-control" id="info_message" name="info_message" rows="4"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+    </form>
+    <a href="{{ url_for('views.home') }}" class="btn btn-link mt-3">Voltar para a Home</a>
+</div>
+
+
+{% endblock%}

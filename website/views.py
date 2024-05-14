@@ -13,8 +13,9 @@ views = Blueprint('views',__name__)
 def home():
     
     tickets_without_reply = Ticket.query.filter_by(reply_text=None).all()
+    user_info = current_user.info # Obter a informação do usuário atual
     
-    return render_template('home.html', tickets_without_reply=tickets_without_reply, user=current_user)
+    return render_template('home.html', tickets_without_reply=tickets_without_reply, user=current_user, user_info=user_info)
 
 
 
@@ -111,3 +112,23 @@ def tickets_without_reply():
         ticket.apto = user.apto if user else "Unknown"
 
     return render_template('tickets_without_reply.html', tickets=tickets_without_reply, user=current_user)
+
+@views.route('/admin/info', methods=['GET', 'POST'])
+@login_required
+def post_message():
+    # Verifica se o usuário atual é um superusuário
+    if not current_user.is_superuser:
+        return render_template('forbidden.html'), 403
+
+    if request.method == 'POST':
+        info_message = request.form.get('info_message')
+        
+        # Adiciona a mensagem para todos os usuários
+        users = User.query.all()
+        for user in users:
+            user.info = info_message
+        db.session.commit()
+        flash('Mensagem enviada para todos os usuários!', 'success')
+        return redirect(url_for('views.post_message'))
+    
+    return render_template('admin.html', user=current_user)

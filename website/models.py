@@ -9,6 +9,7 @@ class User(db.Model, UserMixin):
     primeiro_nome = db.Column(db.String(150))
     is_superuser = db.Column(db.Boolean, default=False)
     apto = db.Column(db.String(10))
+    info = db.Column(db.Text, nullable=True)
 
 class Ticket(db.Model):
     id = db.Column(db.Integer, primary_key=True)

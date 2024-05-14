@@ -18,4 +18,24 @@
 
 
 {% endif%}
+
+<div class="container mt-5">
+  <h1 class="mb-4">Bem-vindo, {{ user.primeiro_nome }}</h1>
+  
+  <!-- Exibir a informação da coluna info -->
+  <p><strong> Mensagem da administração:</strong></p>
+  {% if user_info %}
+      <div class="alert alert-info" role="alert">
+          {{ user_info }}
+      </div>
+  {% else %}
+      <div class="alert alert-secondary" role="alert">
+          Nenhuma informação disponível.
+      </div>
+  {% endif %}
+  
+  
+
+  </ul>
+
 {% endblock%}
