@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Tickets Without Reply{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1>Solicitações sem resposta</h1>
+        <ul class="list-group">
+            {% for ticket in tickets %}
+            <li class="list-group-item">
+                <p><strong>Requisitante:</strong> {{ ticket.primeiro_nome }}</p>
+                <p><strong>Apartamento:</strong> {{ ticket.apto }}</p>
+                <p><strong>Solicitação:</strong> {{ ticket.title }}</p>
+                <strong>Descrição:</strong>
+                <p>{{ ticket.description }}</p>
+                <form method="POST" class="form-inline">
+                    <div class="form-group mb-2">
+                        
+                        <input type="hidden" name="ticket_id" value="{{ ticket.id }}">
+                        <input type="hidden" name="user_id" value="{{ user.id }}">   
+                        <label for="admin_reply_text_{{ ticket.id }}" class="sr-only"><strong>Resposta:</strong></label>
+                        <textarea class="form-control" id="admin_reply_text_{{ ticket.id }}" name="admin_reply_text" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2">Enviar</button>
+                </form>
+            </li>
+            
+                <br>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %} 
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+{% if user.is_superuser %}
+
+  <!-- Solicitações sem resposta -->
+<div class="floating-box">
+    <h4>Solicitações sem resposta</h4>
+    <p>Quantidade: {{ tickets_without_reply|length }}</p>
+    <div class="d-flex justify-content-center">
+      <a href="{{ url_for('.tickets_without_reply') }}" class="btn btn-primary btn-lg">Ver todas</a>
+
+  </div>
+  
+</div>
+
+
+{% endif%}
+{% endblock%}
