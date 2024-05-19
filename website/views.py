@@ -3,6 +3,7 @@ from flask_login import login_required, current_user
 from .models import Ticket, User
 from . import db
 import json
+from datetime import datetime
 
 #define este arquivo como blueprint
 
@@ -14,8 +15,9 @@ def home():
     
     tickets_without_reply = Ticket.query.filter_by(reply_text=None).all()
     user_info = current_user.info # Obter a informação do usuário atual
-    
-    return render_template('home.html', tickets_without_reply=tickets_without_reply, user=current_user, user_info=user_info)
+    info_posted = current_user.info_posted #Obtem a data do envio da mensagem
+
+    return render_template('home.html', tickets_without_reply=tickets_without_reply, user=current_user, user_info=user_info,info_posted=info_posted)
 
 
 
@@ -127,6 +129,7 @@ def post_message():
         users = User.query.all()
         for user in users:
             user.info = info_message
+            user.info_posted = datetime.now()
         db.session.commit()
         flash('Mensagem enviada para todos os usuários!', 'success')
         return redirect(url_for('views.post_message'))

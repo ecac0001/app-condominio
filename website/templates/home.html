@@ -24,14 +24,17 @@
   
   <!-- Exibir a informação da coluna info -->
   <p><strong> Mensagem da administração:</strong></p>
+  
   {% if user_info %}
       <div class="alert alert-info" role="alert">
           {{ user_info }}
       </div>
+      <strong>Data e Hora: {{ info_posted.strftime('%d/%m/%Y %H:%M:%S') }}</strong>
   {% else %}
       <div class="alert alert-secondary" role="alert">
           Nenhuma informação disponível.
       </div>
+      
   {% endif %}
   
   

@@ -10,6 +10,7 @@ class User(db.Model, UserMixin):
     is_superuser = db.Column(db.Boolean, default=False)
     apto = db.Column(db.String(10))
     info = db.Column(db.Text, nullable=True)
+    info_posted = db.Column(db.DateTime, default=func.now(), nullable=True)  # Adicionando coluna para armazenar a data e hora da postagem
 
 class Ticket(db.Model):
     id = db.Column(db.Integer, primary_key=True)
