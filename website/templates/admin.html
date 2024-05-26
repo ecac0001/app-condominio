@@ -15,5 +15,11 @@
     <a href="{{ url_for('views.home') }}" class="btn btn-link mt-3">Voltar para a Home</a>
 </div>
 
+<!-- Include CKEditor CDN -->
+<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+<script>
+    // Replace the <textarea id="info_message"> with a CKEditor instance
+    CKEDITOR.replace('info_message');
+</script>
 
 {% endblock%}

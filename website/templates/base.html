@@ -34,6 +34,7 @@
                     <div class="navbar-nav">
                         {% if user.is_superuser %}
                         <a class="nav-link active" id="home" href="/">Home</a>
+                        <a class="nav-link" id="logout" href="/admin/info">Informar</a>
                         <a class="nav-link" id="logout" href="/logout">Logout</a>
                         {%else %}
                         {% if user.is_authenticated %}
